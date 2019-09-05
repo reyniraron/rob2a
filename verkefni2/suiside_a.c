@@ -13,9 +13,9 @@
 
 /*+++++++++++++++++++++++++++++++++++++++++++++| Notes |++++++++++++++++++++++++++++++++++++++++++++++
 Moving Forward
-This program instructs your robot to move forward at full power for three seconds.
-There is a two second pause at the beginning of the program.
-
+This program instructs your robot to move forward 0,5m at full power and back 0,5m
+repead until it reaces 2,5m.
+observe how I us the header file and include
 ----------------------------------------------------------------------------------------------------*/
 #include "../headers/myheader.h"
 #include "../functions/motorFunctions.inc"
