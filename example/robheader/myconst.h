@@ -1,4 +1,5 @@
 #define WHEELBASE1 4
 #define WHEELBASE2 3
 #define WHEELBASE3 2
-#define TURNCONST 3.7
+#define TURNCONST 3.5
+#define BASETIME 1000

@@ -42,6 +42,7 @@ void stopMotors()
 
 void turn(int deg, bool left_right)
 {
+	//int encoder = (abs(SensorValue[leftEncoder])+ abs(SensorValue[rightEncoder]))/2;
 	while(abs(SensorValue[leftEncoder]) < deg*TURNCONST)
 		{
 			if(left_right)
