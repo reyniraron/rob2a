@@ -11,7 +11,7 @@ File-export as - image
 
 ##  2.hluti 30 stig af 100
 bíbtest (stiginn) með shaft encoder  Hér er það snúningar á hjóli sem ræður færslunni
-Nýtið ykkur Sample program- Shaft encoder- Forward for distance
+Nýtið ykkur Sample program- Shaft encoder- Moving straight
 Notið while lúppu búið til fall void drive(int dist){}
 Gerið sauðakóða sem textaskjal með C kóðanum og flæðirit áður en þið forritið og skilið í Innu
 Athugið að þið þurfið að reikna ummál hjóls og sýna í commenti.  Gerið flæðiritið í http://draw.io þegar búið farið í  File-export as - image
