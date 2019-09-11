@@ -18,8 +18,8 @@ task main()
 {
 	wait1Msec(2000);
 	for (int i = 0; i <= 5; i++) {
-		driveFor(i * BASE_TIME, true);
-		driveFor(i * BASE_TIME, false);
+		driveFor(i * BASE_TIME, true);  // forwards
+		driveFor(i * BASE_TIME, false); // backwards
 	}
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
