@@ -1,5 +1,5 @@
-#ifndef MOTOR_HEADER
-#define MOTOR_HEADER
+#ifndef MOTOR_H_
+#define MOTOR_H_
 #endif
 #define FULL_POWER 127
 #define BASE_TIME 1500

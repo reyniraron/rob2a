@@ -10,16 +10,16 @@
 |*                                                                                                    *|
 \*-----------------------------------------------------------------------------------------------4246-*/
 
-#include "../includes/headers/motor.h"
-#include "../includes/functions/motor.inc"
+#include "headers/motor.h"
+#include "functions/motor.inc"
 
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
 	wait1Msec(2000);
 	for (int i = 0; i <= 5; i++) {
-		driveFor(counter * BASE_TIME, true);
-		driveFor(counter * BASE_TIME, false);
+		driveFor(i * BASE_TIME, true);
+		driveFor(i * BASE_TIME, false);
 	}
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
