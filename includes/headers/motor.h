@@ -5,3 +5,4 @@
 #define BASE_TIME 1000
 
 void driveFor(int time, bool direction);
+void stopMotors();
