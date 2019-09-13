@@ -8,7 +8,7 @@
 |*                                     - Verkefni 2 - 2. hluti -                                      *|
 |*                                                                                                    *|
 |*  This program instructs the robot to move forward at for 0.5 meters, using the shaft encoders,     *|
-|*  and then back 0.5 meters. The robot is automatically straightened.                                *|
+|*  and then back 0.5 meters. The robot is automatically straightened by dynamically changing power.  *|
 |*  This is repeated, increasing the distance 0.5 m every time until 2.5 m is reached.                *|
 |*                                                                                                    *|
 \*-----------------------------------------------------------------------------------------------4246-*/
@@ -22,7 +22,7 @@ task main()
 	wait1Msec(2000);							// Robot waits for 2000 milliseconds before executing program
 
 	resetEncoders();
-	
+
 	while(1 == 1)		// Creates an infinite loop, since "true" always evaluates to true
 	{
 		if(SensorValue[rightEncoder] == SensorValue[leftEncoder]) // If rightEncoder has counted the same amount as leftEncoder:
