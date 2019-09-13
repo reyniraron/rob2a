@@ -13,6 +13,8 @@
 #include "headers/motor.h"
 #include "functions/motor.inc"
 
+#define WAIT_TIME 500;
+
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
@@ -20,10 +22,10 @@ task main()
 	for (int i = 0; i <= 5; i++) {
 		driveFor(i * BASE_TIME, true);  // forwards
 		stopMotors();
-		wait1Msec(500);
+		wait1Msec(WAIT_TIME);
 		driveFor(i * BASE_TIME, false); // backwards
 		stopMotors();
-		wait1Msec(500);
+		wait1Msec(WAIT_TIME);
 	}
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
