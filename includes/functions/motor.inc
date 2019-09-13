@@ -5,3 +5,8 @@ void driveFor(int time, bool direction) {
     motor[rightMotor] = FULL_POWER * dir;
     wait1Msec(time);
 }
+
+void stopMotors() {
+    motor[leftMotor] = 0;
+    motor[rightMotor] = 0;
+}
