@@ -6,3 +6,4 @@
 
 void driveFor(int time, bool direction);
 void stopMotors();
+void resetEncoders();

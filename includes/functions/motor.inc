@@ -6,7 +6,14 @@ void driveFor(int time, bool direction) {
     wait1Msec(time);
 }
 
+// Stop motors from driving
 void stopMotors() {
     motor[leftMotor] = 0;
     motor[rightMotor] = 0;
+}
+
+// Reset shaft encoders
+void resetEncoders() {
+    SensorValue[rightEncoder] = 0;
+	SensorValue[leftEncoder] = 0;
 }
