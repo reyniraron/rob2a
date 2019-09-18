@@ -13,7 +13,7 @@
 #include "headers/motor.h"
 #include "functions/motor.inc"
 
-#define WAIT_TIME 500;
+#define WAIT_TIME 500
 
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
