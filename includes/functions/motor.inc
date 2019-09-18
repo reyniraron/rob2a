@@ -23,7 +23,7 @@ void driveForDistance(int distance, bool direction, int normalSpeed, int slowerS
     int dir = direction ? 1 : -1;  // 1 if forward, 2 if backwards
     resetEncoders();
     // Drive until both sensors reach the target value
-    while (abs(SensorValue[rightEncoder]) < distance || abs(SensorValue[leftEncoder]) < targetValue) {		// Creates an infinite loop, since "true" always evaluates to true
+    while (abs(SensorValue[rightEncoder]) < distance || abs(SensorValue[leftEncoder]) < distance) {		// Creates an infinite loop, since "true" always evaluates to true
         // If both encoders have the same value, move at normal speed forward or backwards
         if (SensorValue[rightEncoder] == SensorValue[leftEncoder]) {
             // Move Forward
