@@ -15,6 +15,8 @@
 
 #include "headers/motor.h"
 #include "functions/motor.inc"
+#include "headers/encoders.h"
+#include "functions/encoders.inc"
 
 #define NORMAL_SPEED 80
 #define SLOWER_SPEED 60
