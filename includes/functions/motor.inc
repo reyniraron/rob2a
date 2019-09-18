@@ -22,7 +22,7 @@ void resetEncoders() {
 void driveForDistance(int distance, bool direction, int normalSpeed, int slowerSpeed) {
     int dir = direction ? 1 : -1;  // 1 if forward, 2 if backwards
     resetEncoders();
-    // Drive until both sensors reach the target value
+    // Drive until both sensors reach the target value, straightening the robot automatically
     while (abs(SensorValue[rightEncoder]) < distance || abs(SensorValue[leftEncoder]) < distance) {		// Creates an infinite loop, since "true" always evaluates to true
         // If both encoders have the same value, move at normal speed forward or backwards
         if (SensorValue[rightEncoder] == SensorValue[leftEncoder]) {
