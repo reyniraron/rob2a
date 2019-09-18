@@ -31,7 +31,7 @@ void driveForDistance(int distance, bool direction, int normalSpeed, int slowerS
             motor[leftMotor]  = normalSpeed * dir;
         }
         // Turn slightly right
-        else if (SensorValue[rightEncoder] > SensorValue[leftEncoder]) {
+        else if (abs(SensorValue[rightEncoder]) > abs(SensorValue[leftEncoder])) {
             motor[rightMotor] = slowerSpeed * dir;
             motor[leftMotor]  = normalSpeed * dir;
         }
