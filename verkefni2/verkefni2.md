@@ -10,7 +10,7 @@ Notið for-lúppu eða while búið til fall void drive(int drivetime Gerið fl�
 File-export as - image. Skilið vido af vélmenni leysa allar þrautinar setjið á YouTube og eða geymið í ykkar repository og skilið slóð á videóið í Innu.
 
 ##  2.hluti 30 stig af 100
-Suiside samacerkefni og 1.hluti nema með með shaft encoder  Hér er það snúningar á hjóli sem ræður færslunni
+Suiside sama verkefni og 1.hluti nema með með shaft encoder  Hér er það snúningar á hjóli sem ræður færslunni
 Nýtið ykkur Sample program- Shaft encoder- Moving straight
 Notið while lúppu búið til fall void drive(int dist){}
 Gerið sauðakóða sem textaskjal með C kóðanum og flæðirit áður en þið forritið og skilið í Innu
