@@ -26,5 +26,16 @@ void driveForDistance(int distance, bool direction, int normalSpeed, int slowerS
             motor[rightMotor] = normalSpeed * dir;
             motor[leftMotor]  = slowerSpeed * dir;
         }
-    }   
+    }
+}
+
+// Turn a specified number of degrees
+void turn(float deg, bool direction) {
+    int dir = direction ? 1 : -1;
+    resetEncoders();
+    while ((SensorValue[rightEncoder] < deg) && (SensorValue[leftEncoder] > (-1 * deg))) {
+        motor[rightMotor] = 63 * dir;
+        motor[leftMotor] = -63 * dir;
+    }
+    stopMotors();
 }

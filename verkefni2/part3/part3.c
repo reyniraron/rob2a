@@ -7,13 +7,8 @@
 /*----------------------------------------------------------------------------------------------------*\
 |*                                     - Verkefni 2 - 3. hluti -                                      *|
 |*                                                                                                    *|
-|*  This program instructs the robot to move forward for 0.5 meters, using the shaft encoders,        *|
-|*  and then back 0.5 meters. The robot is automatically straightened by dynamically changing power.  *|
-|*  This is repeated, increasing the distance 0.5 m every time until 2.5 m is reached.                *|
-|*
-|*                                      - Wheel Circumference -                                       *|
-|*  The wheels on the robot have a radius of 5.2 cm each. Circumference is equal to 2 * r * pi,       *|
-|*  which equals about 32.67 cm.                                                                      *|
+|*  This program instructs the robot to move forward for 0.5 meters at a time, 15 times, and turn in  *|
+|*  different, predetermined directions in between to solve a specific problem.                       *|
 |*                                                                                                    *|
 \*-----------------------------------------------------------------------------------------------4246-*/
 
@@ -26,19 +21,39 @@
 #define SLOWER_SPEED 60
 #define WAIT_TIME 1000
 
+#define RIGHT true
+#define LEFT false
+
+// Directions to turn in (in order)
+bool turns[15] = {
+	RIGHT,
+	LEFT,
+	LEFT,
+	RIGHT,
+	RIGHT,
+	LEFT,
+	RIGHT,
+	RIGHT,
+	LEFT,
+	RIGHT,
+	RIGHT,
+	LEFT,
+	LEFT,
+	RIGHT,
+	0  // Do not turn in the end
+};
+
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
+	const float TURN = FULL_TURN * (90 / 360);
 	wait1Msec(2000);							// Robot waits for 2000 milliseconds before executing program
-
-	for (int i = 0; i <= 5; i++) {
-		// resetEncoders();
-		driveForDistance(i * BASE_DIST, true, NORMAL_SPEED, SLOWER_SPEED);  // forwards
+	int i = 0;
+	// for (int i = 0; i < 15; i++) {
+		driveForDistance(BASE_DIST, true, NORMAL_SPEED, SLOWER_SPEED);  // forwards
 		stopMotors();
-		wait1Msec(WAIT_TIME);
-		driveForDistance(i * BASE_DIST, false, NORMAL_SPEED, SLOWER_SPEED); // backwards
-		stopMotors();
-		wait1Msec(WAIT_TIME);
-	}
+		wait1MSec(WAIT_TIME);
+		turn(TURN, turns[i]);
+	// }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
