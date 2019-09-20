@@ -10,6 +10,10 @@
 |*  This program instructs the robot to move forward for 0.5 meters, using the shaft encoders,        *|
 |*  and then back 0.5 meters. The robot is automatically straightened by dynamically changing power.  *|
 |*  This is repeated, increasing the distance 0.5 m every time until 2.5 m is reached.                *|
+|*
+|*                                      - Wheel Circumference -                                       *|
+|*  The wheels on the robot have a radius of 5.2 cm each. Circumference is equal to 2 * r * pi,       *|
+|*  which equals about 32.67 cm.                                                                      *| 
 |*                                                                                                    *|
 \*-----------------------------------------------------------------------------------------------4246-*/
 
