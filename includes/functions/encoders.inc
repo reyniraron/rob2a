@@ -33,7 +33,7 @@ void driveForDistance(int distance, bool direction, int normalSpeed, int slowerS
 void turn(float deg, bool direction) {
     int dir = direction ? 1 : -1;
     resetEncoders();
-    while ((SensorValue[rightEncoder] < deg) && (SensorValue[leftEncoder] > (-1 * deg))) {
+    while (abs(SensorValue[rightEncoder]) < deg && SensorValue[leftEncoder] > -deg) {
         motor[rightMotor] = 63 * dir;
         motor[leftMotor] = -63 * dir;
     }

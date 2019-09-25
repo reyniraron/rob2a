@@ -46,14 +46,14 @@ bool turns[15] = {
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
-	const float TURN = FULL_TURN * (90 / 360);
+	const float TURN_DEG = FULL_TURN * 90.0 / 360.0;
 	wait1Msec(2000);							// Robot waits for 2000 milliseconds before executing program
 	int i = 0;
 	// for (int i = 0; i < 15; i++) {
 		driveForDistance(BASE_DIST, true, NORMAL_SPEED, SLOWER_SPEED);  // forwards
 		stopMotors();
-		wait1MSec(WAIT_TIME);
-		turn(TURN, turns[i]);
+		wait1Msec(WAIT_TIME);
+		turn(TURN_DEG, turns[i]);
 	// }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

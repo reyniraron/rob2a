@@ -1,5 +1,5 @@
 #define BASE_DIST 430
-#define FULL_TURN 720
+#define FULL_TURN 935
 
 #ifndef MOTOR_H_
 #define MOTOR_H_
