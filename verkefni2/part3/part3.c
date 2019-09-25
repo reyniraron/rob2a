@@ -25,7 +25,7 @@
 #define LEFT false
 
 // Directions to turn in (in order)
-bool turns[15] = {
+short turns[15] = {
 	RIGHT,
 	LEFT,
 	LEFT,
@@ -40,7 +40,7 @@ bool turns[15] = {
 	LEFT,
 	LEFT,
 	RIGHT,
-	0  // Do not turn in the end
+	-1  // Do not turn in the end
 };
 
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
@@ -49,10 +49,15 @@ task main()
 	const float TURN_DEG = BASE_TURN * 90.0 / 360.0;
 	wait1Msec(2000);							// Robot waits for 2000 milliseconds before executing program
 	for (int i = 0; i < 15; i++) {
-		driveForDistance(BASE_DIST, true, NORMAL_SPEED, SLOWER_SPEED);  // forwards
+		// writeDebugStream("Round %d: ", i);
+		driveForDistance(BASE_DIST / 2.0, true, NORMAL_SPEED, SLOWER_SPEED);  // forwards
 		stopMotors();
+		// writeDebugStream("Finished moving. ");
 		wait1Msec(WAIT_TIME);
-		turn(TURN_DEG, turns[i]);
+		if (turns[i] != -1) {
+			// writeDebugStreamLine("Turning %d in direction %d.", TURN_DEG, turns[i]);
+			turn(TURN_DEG, turns[i]);
+		}
 	}
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
