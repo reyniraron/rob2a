@@ -54,6 +54,7 @@ task main()
 		stopMotors();
 		// writeDebugStream("Finished moving. ");
 		wait1Msec(WAIT_TIME);
+		// -1 in turns array means don't turn
 		if (turns[i] != -1) {
 			// writeDebugStreamLine("Turning %d in direction %d.", TURN_DEG, turns[i]);
 			turn(TURN_DEG, turns[i]);
