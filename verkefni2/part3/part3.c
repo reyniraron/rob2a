@@ -50,7 +50,7 @@ task main()
 	wait1Msec(2000);							// Robot waits for 2000 milliseconds before executing program
 	for (int i = 0; i < 15; i++) {
 		// writeDebugStream("Round %d: ", i);
-		driveForDistance(BASE_DIST / 2.0, true, NORMAL_SPEED, SLOWER_SPEED);  // forwards
+		driveForDistance(BASE_DIST, true, NORMAL_SPEED, SLOWER_SPEED);  // forwards
 		stopMotors();
 		// writeDebugStream("Finished moving. ");
 		wait1Msec(WAIT_TIME);
