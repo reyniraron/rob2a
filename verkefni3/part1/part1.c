@@ -8,7 +8,7 @@
 |*                                     - Verkefni 3 - 1. hluti -                                      *|
 |*                                                                                                    *|
 |*  This program uses the left joystick to move the robot forward and backward and the right joystick *|
-|*  to turn.                                                                                          *|
+|*  to turn. Button 8R lifts the arm, 8D lowers the arm, 8U opens the claw and 8L closes it.          *|
 |*                                                                                                    *|
 \*----------------------------------------------------------------------------------------------------*/
 
@@ -18,6 +18,9 @@ task main ()
 	short rightJoyXValue;
 	short leftJoyYValue;
   while (true) {
+  	/* ==============
+  	   Robot movement
+  	   ============== */
   	rightJoyXValue = vexRT[Ch1];  // Right joystick X axis
   	leftJoyYValue = vexRT[Ch3];   // Left joystick Y axis
   	// Turning sideways
@@ -30,9 +33,12 @@ task main ()
     	motor[leftMotor]  = leftJoyYValue;
     	motor[rightMotor] = leftJoyYValue;
     }
+    /* ===
+       Arm
+       === */
     // Arm up
     if (vexRT[Btn8R]) {
-    	motor[armMotor] = 32;
+    	motor[armMotor] = 63;
     }
     // Arm down
     else if (vexRT[Btn8D]) {
@@ -41,6 +47,15 @@ task main ()
     // Arm stationary
     else {
     	motor[armMotor] = 0;
+    }
+    /* ====
+       Claw
+       ==== */
+    if (vexRT[Btn8U]) {
+    	motor[clawMotor] = 127;
+    }
+    else if (vexRT[Btn8L]) {
+    	motor[clawMotor] = -127;
     }
   }
 }
