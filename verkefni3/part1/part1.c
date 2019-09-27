@@ -52,10 +52,10 @@ task main ()
        Claw
        ==== */
     if (vexRT[Btn8U]) {
-    	motor[clawMotor] = 60;
+    	motor[clawMotor] = 63;
     }
     else if (vexRT[Btn8L]) {
-    	motor[clawMotor] = -60;
+    	motor[clawMotor] = -63;
     }
     else {
     	motor[clawMotor] = 0;
