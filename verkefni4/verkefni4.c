@@ -31,6 +31,7 @@
 task main()
 {
 	StartTask(watchForStop);  // Watch for stop button presses
+	wait1Msec(2000);
 	const float TURN_DEG = BASE_TURN * 90.0 / 360.0;
 	while (true) {
 		// Drive only if light sensor value is below 200 (bright)
