@@ -11,7 +11,7 @@
 |*                                           - Verkefni 4 -                                           *|
 |*                                                                                                    *|
 |*  This program instructs the robot to move forward for as long as it can while not getting closer   *|
-|*  than 20 cm to any obstacles. If the robot is too close to obstacles, it will turn in a random     *|
+|*  than 30 cm to any obstacles. If the robot is too close to obstacles, it will turn in a random     *|
 |*  direction in an attempt to find a clear path.                                                     *|
 |*                                                                                                    *|
 \*-----------------------------------------------------------------------------------------------4246-*/
@@ -33,16 +33,22 @@ task main()
 	StartTask(watchForStop);  // Watch for stop button presses
 	const float TURN_DEG = BASE_TURN * 90.0 / 360.0;
 	while (true) {
-		int sonarValue = SensorValue(sonar);
-		// Drive forward if sonar is more than 20 cm away from obstacles
-		if (sonarValue > 20 || sonarValue == -1) {
-			motor[leftMotor] = SPEED;
-			motor[rightMotor] = SPEED;
+		// Drive only if light sensor value is below 200 (bright)
+		if (SensorValue(lightSensor) < 200) {
+			int sonarValue = SensorValue(sonar);
+			// Drive forward if sonar is more than 20 cm away from obstacles
+			if (sonarValue > 30 || sonarValue == -1) {
+				motor[leftMotor] = SPEED;
+				motor[rightMotor] = SPEED;
+			}
+			// If sonar is within 30 cm proximity of an obstacle turn in a random direction
+			else {
+				stopMotors();
+				turn(TURN_DEG, random(2)); // 0 or 1 (right or left)
+			}
 		}
-		// If sonar is within 20 cm proximity, turn in a random direction
 		else {
 			stopMotors();
-			turn(TURN_DEG, random(2)); // 0 or 1 (right or left)
 		}
 	}
 }
