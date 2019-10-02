@@ -42,7 +42,7 @@ task main()
 		// If sonar is within 20 cm proximity, turn in a random direction
 		else {
 			stopMotors();
-			turn(TURN_DEG, random(1));
+			turn(TURN_DEG, random(2)); // 0 or 1 (right or left)
 		}
 	}
 }
