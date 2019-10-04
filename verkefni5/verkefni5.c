@@ -33,19 +33,19 @@ task main()
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -+
 
     // RIGHT sensor sees dark:
-    if(SensorValue(lineFollowerRIGHT) > threshold) {
+    if (SensorValue(lineFollowerRIGHT) > threshold) {
       // counter-steer right:
       motor[leftMotor]  = 63;
       motor[rightMotor] = 0;
     }
     // CENTER sensor sees dark:
-    if(SensorValue(lineFollowerCENTER) > threshold) {
+    if (SensorValue(lineFollowerCENTER) > threshold) {
       // go straight
       motor[leftMotor]  = 63;
       motor[rightMotor] = 63;
     }
     // LEFT sensor sees dark:
-    if(SensorValue(lineFollowerLEFT) > threshold) {
+    if (SensorValue(lineFollowerLEFT) > threshold) {
       // counter-steer left:
       motor[leftMotor]  = 0;
       motor[rightMotor] = 63;
