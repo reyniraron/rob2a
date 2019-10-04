@@ -20,3 +20,9 @@ typedef struct Pos{
 	int y;
 	int z;
 }Pos;
+
+typedef struct Mystruct{
+	int length;
+	int with;
+	string mystring;
+}Mystruct;
