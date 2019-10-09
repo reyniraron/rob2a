@@ -22,7 +22,7 @@
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
-	StartTask(watchForStop);  // Watch for stop button presses
+  StartTask(watchForStop);  // Watch for stop button presses
   wait1Msec(2000);
 
   int threshold = 2300;  // Found by adding sensor values for dark and light together and dividing by 2
@@ -30,11 +30,11 @@ task main()
   	// Show sensor values on LCD
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -+
     displayLCDCenteredString(0, "LEFT  CNTR  RGHT");        //            |
-    displayLCDPos(1, 0);                                     //            |
+    displayLCDPos(1, 0);                                    //            |
     displayNextLCDNumber(SensorValue(lineFollowerLEFT));    //            |
-    displayLCDPos(1, 6);                                     //            |
+    displayLCDPos(1, 6);                                    //            |
     displayNextLCDNumber(SensorValue(lineFollowerCENTER));  //            |
-    displayLCDPos(1, 12);                                    //  L  C  R   |
+    displayLCDPos(1, 12);                                   //  L  C  R   |
     displayNextLCDNumber(SensorValue(lineFollowerRIGHT));   //  x  x  x   |
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -+
 
