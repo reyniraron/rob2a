@@ -16,42 +16,42 @@
 #include "headers/stop.h"
 #include "functions/stop.inc"
 
+#define POWER 63
+#define LOW_POWER POWER / 4
+
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
-	StartTask(watchForStop);
-  wait1Msec(2000);          // The program waits for 2000 milliseconds before continuing.
+	StartTask(watchForStop);  // Watch for stop button presses
+  wait1Msec(2000);
 
-  int threshold = 505;      /* found by taking a reading on both DARK and LIGHT    */
-                            /* surfaces, adding them together, then dividing by 2. */
+  int threshold = 2300;  // Found by adding sensor values for dark and light together and dividing by 2
   while (true) {
+  	// Show sensor values on LCD
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -+
-    displayLCDCenteredString(0, "LEFT  CNTR  RGHT");        //  Display   |
-    displayLCDPos(1,0);                                     //  Sensor    |
-    displayNextLCDNumber(SensorValue(lineFollowerLEFT));    //  Readings  |
-    displayLCDPos(1,6);                                     //  to LCD.   |
+    displayLCDCenteredString(0, "LEFT  CNTR  RGHT");        //            |
+    displayLCDPos(1, 0);                                     //            |
+    displayNextLCDNumber(SensorValue(lineFollowerLEFT));    //            |
+    displayLCDPos(1, 6);                                     //            |
     displayNextLCDNumber(SensorValue(lineFollowerCENTER));  //            |
-    displayLCDPos(1,12);                                    //  L  C  R   |
+    displayLCDPos(1, 12);                                    //  L  C  R   |
     displayNextLCDNumber(SensorValue(lineFollowerRIGHT));   //  x  x  x   |
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -+
 
-    // RIGHT sensor sees dark:
+    // If right sensor sees dark, counter-steer right
     if (SensorValue(lineFollowerRIGHT) > threshold) {
-      // counter-steer right:
-      motor[leftMotor]  = 63;
-      motor[rightMotor] = 0;
+      motor[leftMotor]  = POWER;
+      motor[rightMotor] = LOW_POWER;
     }
-    // CENTER sensor sees dark:
+    // If center sensor sees dark, go straight
     if (SensorValue(lineFollowerCENTER) > threshold) {
-      // go straight
-      motor[leftMotor]  = 63;
-      motor[rightMotor] = 63;
+      motor[leftMotor]  = POWER;
+      motor[rightMotor] = POWER;
     }
-    // LEFT sensor sees dark:
+    // If left sensor sees dark, counter-steer left
     if (SensorValue(lineFollowerLEFT) > threshold) {
-      // counter-steer left:
-      motor[leftMotor]  = 0;
-      motor[rightMotor] = 63;
+      motor[leftMotor]  = LOW_POWER;
+      motor[rightMotor] = POWER;
     }
   }
 }
