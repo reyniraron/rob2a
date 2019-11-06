@@ -74,28 +74,10 @@ void findLine(int sensorNo, int threshold, int fullPower, int lowPower) {
 	}
 }
 
-//+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
-task main()
-{
-  StartTask(watchForStop);  // Watch for stop button presses
-  updateLinePart(paths[0][0], 0, BASE_DIST, -90);
+bool isOnLine = false;
 
-  for (int i = 0; i < sizeof(paths) / sizeof(paths[0]); i++) {
-  	writeDebugStreamLine("-------------");
-  	writeDebugStream("PATH %d:", i);
-  	for (int j = 0; j < sizeof(paths[i]) / sizeof(paths[i][0]); j++) {
-  		writeDebugStreamLine("\nPart %d", j);
-  		writeDebugStreamLine("Start turn: %d", paths[i][j].startTurn);
-  		writeDebugStreamLine("Distance: %d", paths[i][j].distance);
-  		writeDebugStreamLine("End turn: %d", paths[i][j].endTurn);
-  	}
-  	writeDebugStreamLine("-------------\n");
-	}
-
-  wait1Msec(2000);
-  /*
-
-  int maxSensorNo;
+task watchLine() {
+	int maxSensorNo;
 
   int threshold = 2340;  // Found by adding sensor values for dark and light together and dividing by 2
   while (true) {
@@ -114,14 +96,12 @@ task main()
     int centerValue = SensorValue(lineFollowerCENTER);
     int rightValue = SensorValue(lineFollowerRIGHT);
 
-    bool isOnLine = false;
-
     // writeDebugStreamLine("Max sensor: %d", maxSensorNo);
 
     // If right sensor sees dark, counter-steer right
     if (rightValue > threshold) {
-      motor[leftMotor]  = POWER;
-      motor[rightMotor] = LOW_POWER;
+      // motor[leftMotor]  = POWER;
+      // motor[rightMotor] = LOW_POWER;
 
       // Right has highest value
       if (rightValue > centerValue && rightValue > leftValue) {
@@ -131,8 +111,8 @@ task main()
     }
     // If center sensor sees dark, go straight
     if (centerValue > threshold) {
-      motor[leftMotor]  = POWER;
-      motor[rightMotor] = POWER;
+      // motor[leftMotor]  = POWER;
+      // motor[rightMotor] = POWER;
 
       // Center has highest value
       if (centerValue > leftValue && centerValue > rightValue) {
@@ -142,8 +122,8 @@ task main()
     }
     // If left sensor sees dark, counter-steer left
     if (leftValue > threshold) {
-      motor[leftMotor]  = LOW_POWER;
-      motor[rightMotor] = POWER;
+      // motor[leftMotor]  = LOW_POWER;
+      // motor[rightMotor] = POWER;
 
       // Left has highest value
 	    if (leftValue > centerValue && leftValue > rightValue) {
@@ -151,12 +131,71 @@ task main()
 	    }
 	    isOnLine = true;
     }
-
-    // If robot is not on line, find line
     if (!isOnLine) {
     	// writeDebugStreamLine("Robot lost line!");
     	findLine(maxSensorNo, threshold, POWER, LOW_POWER);
     }
-  }*/
+  }
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
+task main()
+{
+  StartTask(watchForStop);  // Watch for stop button presses
+
+  // Set line parts
+  /* ======
+     Path 1
+     ====== */
+  updateLinePart(paths[0][0], 0, BASE_DIST, -90);
+  updateLinePart(paths[0][1], 0, BASE_DIST, 0);
+  updateLinePart(paths[0][2], 0, BASE_DIST, 0);
+  updateLinePart(paths[0][3], 0, BASE_DIST, 90);
+  updateLinePart(paths[0][4], 0, BASE_DIST, 0);
+
+  wait1Msec(2000);
+
+  StartTask(watchLine);  // Make sure that robot is on line
+
+  for (int i = 0; i < sizeof(paths) / sizeof(paths[0]); i++) {
+  	writeDebugStreamLine("-------------");
+  	writeDebugStream("PATH %d:", i);
+  	for (int j = 0; j < sizeof(paths[i]) / sizeof(paths[i][0]); j++) {
+  		while (!isOnLine) {}  // Wait until robot is on line
+  		// TODO: Make robot go back (currently only goes forward)
+  		// Also make this actually work
+  		writeDebugStreamLine("\nPart %d", j);
+
+  		writeDebugStreamLine("Start turn: %d", paths[i][j].startTurn);
+  		bool startTurnDir;
+  		// If turn goes right
+  		if (paths[i][j].startTurn < 0) {
+  			startTurnDir = false;
+  		}
+  		// If turn goes left
+  		else {
+  			startTurnDir = true;
+  		}
+  		turn(abs(paths[i][j].startTurn), startTurnDir);
+  		wait1Msec(500);
+
+  		writeDebugStreamLine("Distance: %d", paths[i][j].distance);
+  		driveForDistance(BASE_DIST, true, FULL_POWER, LOW_POWER);
+  		wait1Msec(500);
+
+  		writeDebugStreamLine("End turn: %d", paths[i][j].endTurn);
+  		bool endTurnDir;
+  		// If turn goes left
+  		if (paths[i][j].endTurn < 0) {
+  			endTurnDir = false;
+  		}
+  		// If turn goes right
+  		else {
+  			endTurnDir = true;
+  		}
+  		turn(abs(paths[i][j].endTurn), endTurnDir);
+  	}
+  	writeDebugStreamLine("-------------\n");
+	}
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
