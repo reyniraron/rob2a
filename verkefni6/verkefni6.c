@@ -158,30 +158,64 @@ task main()
   StartTask(watchLine);  // Make sure that robot is on line
 
   for (int i = 0; i < sizeof(paths) / sizeof(paths[0]); i++) {
-  	writeDebugStreamLine("-------------");
-  	writeDebugStream("PATH %d:", i);
-  	for (int j = 0; j < sizeof(paths[i]) / sizeof(paths[i][0]); j++) {
-  		while (!isOnLine) {}  // Wait until robot is on line
-  		// TODO: Make robot go back (currently only goes forward)
-  		// Also make this actually work
-  		writeDebugStreamLine("\nPart %d", j);
+  	for (int k = 0; k < 2; k++) {
+  		writeDebugStreamLine("-------------");
+  		writeDebugStream("PATH %d ", i);
+  		if (k == 0) {
+  			writeDebugStreamLine("(forward)");
+  		}
+  		else {
+  			writeDebugStreamLine("(backwards)");
+  		}
+  		const int maxJ = sizeof(paths[i]) / sizeof(paths[i][0]);
+	  	for (int j = 0; j < maxJ; j++) {
+				int startTurn;
+				int endTurn;
 
-  		writeDebugStreamLine("Start turn: %d", paths[i][j].startTurn);
-  		bool startTurnDir = paths[i][j].startTurn >= 0;
-  		turn(BASE_TURN * abs(paths[i][j].startTurn) / 360.0, startTurnDir);
-  		wait1Msec(500);
+				bool startTurnDir;
+				bool endTurnDir;
 
-  		writeDebugStreamLine("Distance: %d", paths[i][j].distance);
-  		driveForDistance(paths[i][j].distance, true, FULL_POWER, LOW_POWER);
-  		stopMotors();
-  		wait1Msec(500);
+				int distance;
 
-  		writeDebugStreamLine("End turn: %d", paths[i][j].endTurn);
-  		bool endTurnDir = paths[i][j].endTurn >= 0;
-  		turn(BASE_TURN * (float)abs(paths[i][j].endTurn) / 360.0, endTurnDir);
-  		wait1Msec(500);
-  	}
-  	writeDebugStreamLine("-------------\n");
+				// Go in reverse if k == 1
+				if (k == 0) {
+					startTurn = paths[i][j].startTurn;
+					endTurn = paths[i][j].endTurn;
+					distance = paths[i][j].distance;
+				}
+				else {
+					// Get array element from right
+					startTurn = -paths[i][maxJ-j-1].endTurn;
+					endTurn = -paths[i][maxJ-j-1].startTurn;
+					distance = paths[i][maxJ-j-1].distance;
+				}
+
+				startTurnDir = startTurn >= 0;
+				endTurnDir = endTurn >= 0;
+
+	  		while (!isOnLine) {}  // Wait until robot is on line
+	  		// TODO: Make robot go back (currently only goes forward)
+	  		// Also make this actually work
+	  		writeDebugStreamLine("\nPart %d", j);
+
+	  		writeDebugStreamLine("Start turn: %d", startTurn);
+	  		turn(BASE_TURN * (float)abs(startTurn) / 360.0, startTurnDir);
+	  		wait1Msec(500);
+
+	  		writeDebugStreamLine("Distance: %d", distance);
+	  		driveForDistance(distance, true, FULL_POWER, LOW_POWER);
+	  		stopMotors();
+	  		wait1Msec(500);
+
+	  		writeDebugStreamLine("End turn: %d", endTurn);
+	  		turn(BASE_TURN * (float)abs(endTurn) / 360.0, endTurnDir);
+	  		wait1Msec(500);
+	  	}
+	  	writeDebugStreamLine("-------------\n");
+	  	writeDebugStreamLine("Turning around...\n");
+	  	turn(BASE_TURN * 180.0 / 360.0, true);  // Turn around
+	  	wait1Msec(500);
+	  }
 	}
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
