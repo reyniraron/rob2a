@@ -167,33 +167,19 @@ task main()
   		writeDebugStreamLine("\nPart %d", j);
 
   		writeDebugStreamLine("Start turn: %d", paths[i][j].startTurn);
-  		bool startTurnDir;
-  		// If turn goes right
-  		if (paths[i][j].startTurn < 0) {
-  			startTurnDir = false;
-  		}
-  		// If turn goes left
-  		else {
-  			startTurnDir = true;
-  		}
-  		turn(abs(paths[i][j].startTurn), startTurnDir);
+  		bool startTurnDir = paths[i][j].startTurn >= 0;
+  		turn(BASE_TURN * abs(paths[i][j].startTurn) / 360.0, startTurnDir);
   		wait1Msec(500);
 
   		writeDebugStreamLine("Distance: %d", paths[i][j].distance);
-  		driveForDistance(BASE_DIST, true, FULL_POWER, LOW_POWER);
+  		driveForDistance(paths[i][j].distance, true, FULL_POWER, LOW_POWER);
+  		stopMotors();
   		wait1Msec(500);
 
   		writeDebugStreamLine("End turn: %d", paths[i][j].endTurn);
-  		bool endTurnDir;
-  		// If turn goes left
-  		if (paths[i][j].endTurn < 0) {
-  			endTurnDir = false;
-  		}
-  		// If turn goes right
-  		else {
-  			endTurnDir = true;
-  		}
-  		turn(abs(paths[i][j].endTurn), endTurnDir);
+  		bool endTurnDir = paths[i][j].endTurn >= 0;
+  		turn(BASE_TURN * (float)abs(paths[i][j].endTurn) / 360.0, endTurnDir);
+  		wait1Msec(500);
   	}
   	writeDebugStreamLine("-------------\n");
 	}
