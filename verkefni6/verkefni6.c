@@ -169,29 +169,29 @@ task main()
   		}
   		const int maxJ = sizeof(paths[i]) / sizeof(paths[i][0]);
 	  	for (int j = 0; j < maxJ; j++) {
-				int startTurn;
-				int endTurn;
+			int startTurn;
+			int endTurn;
 
-				bool startTurnDir;
-				bool endTurnDir;
+			bool startTurnDir;
+			bool endTurnDir;
 
-				int distance;
+			int distance;
 
-				// Go in reverse if k == 1
-				if (k == 0) {
-					startTurn = paths[i][j].startTurn;
-					endTurn = paths[i][j].endTurn;
-					distance = paths[i][j].distance;
-				}
-				else {
-					// Get array element from right
-					startTurn = -paths[i][maxJ-j-1].endTurn;
-					endTurn = -paths[i][maxJ-j-1].startTurn;
-					distance = paths[i][maxJ-j-1].distance;
-				}
+			// Go in reverse if k == 1
+			if (k == 0) {
+				startTurn = paths[i][j].startTurn;
+				endTurn = paths[i][j].endTurn;
+				distance = paths[i][j].distance;
+			}
+			else {
+				// Get array element from right
+				startTurn = -paths[i][maxJ-j-1].endTurn;
+				endTurn = -paths[i][maxJ-j-1].startTurn;
+				distance = paths[i][maxJ-j-1].distance;
+			}
 
-				startTurnDir = startTurn >= 0;
-				endTurnDir = endTurn >= 0;
+			startTurnDir = startTurn >= 0;
+			endTurnDir = endTurn >= 0;
 
 	  		while (!isOnLine) {}  // Wait until robot is on line
 	  		// TODO: Make robot go back (currently only goes forward)
