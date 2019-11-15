@@ -22,9 +22,13 @@
 #include "functions/motor.inc"
 #include "headers/encoders.h"
 #include "functions/encoders.inc"
+#include "headers/linefollowers.h"
+#include "functions/linefollowers.inc"
 
-#define POWER 63
+#define POWER 31
 #define LOW_POWER POWER / 4
+
+const int threshold = 2340;  // Found by adding sensor values for dark and light together and dividing by 2
 
 typedef struct LinePart {
 	int startTurn;
@@ -75,11 +79,9 @@ void findLine(int sensorNo, int threshold, int fullPower, int lowPower) {
 }
 
 bool isOnLine = false;
+int maxSensorNo = 0;
 
 task watchLine() {
-	int maxSensorNo;
-
-  int threshold = 2340;  // Found by adding sensor values for dark and light together and dividing by 2
   while (true) {
   	// Show sensor values on LCD
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -+
@@ -98,6 +100,7 @@ task watchLine() {
 
     // writeDebugStreamLine("Max sensor: %d", maxSensorNo);
 
+    isOnLine = false;
     // If right sensor sees dark, counter-steer right
     if (rightValue > threshold) {
       // motor[leftMotor]  = POWER;
@@ -131,10 +134,12 @@ task watchLine() {
 	    }
 	    isOnLine = true;
     }
-    if (!isOnLine) {
-    	// writeDebugStreamLine("Robot lost line!");
-    	findLine(maxSensorNo, threshold, POWER, LOW_POWER);
-    }
+    // Wait until robot is on line
+		if (!isOnLine) {
+			// FIXME: Never writes to debug stream, presumably never gets called
+			writeDebugStreamLine("Robot is not on line! Looking for line...");
+			findLine(maxSensorNo, threshold, POWER, LOW_POWER);
+		}
   }
 }
 
@@ -224,7 +229,7 @@ task main()
 					continue;
 				}
 
-				while (!isOnLine) {}  // Wait until robot is on line
+				while (!isOnLine) {}
 	  		// TODO: Make robot go back (currently only goes forward)
 	  		// Also make this actually work
 	  		writeDebugStreamLine("\nPart %d", j);
@@ -234,7 +239,7 @@ task main()
 	  		wait1Msec(500);
 
 	  		writeDebugStreamLine("Distance: %d", distance);
-	  		driveForDistance(distance, true, FULL_POWER, LOW_POWER);
+	  		followLineForDistance(distance, true, threshold, FULL_POWER, LOW_POWER);
 	  		stopMotors();
 	  		wait1Msec(500);
 
