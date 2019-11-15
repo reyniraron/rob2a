@@ -138,13 +138,8 @@ task watchLine() {
   }
 }
 
-//+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
-task main()
-{
-  StartTask(watchForStop);  // Watch for stop button presses
-
-  // Set line parts
-  /* ======
+void initPathsArray() {
+	/* ======
      Path 1
      ====== */
   updateLinePart(paths[0][0], 0, BASE_DIST, -90);
@@ -152,6 +147,37 @@ task main()
   updateLinePart(paths[0][2], 0, BASE_DIST, 0);
   updateLinePart(paths[0][3], 0, BASE_DIST, 90);
   updateLinePart(paths[0][4], 0, BASE_DIST, 0);
+
+  /* ======
+     Path 2
+     ====== */
+  updateLinePart(paths[1][0], 0, BASE_DIST, -90);
+  updateLinePart(paths[1][1], 0, BASE_DIST, 0);
+  updateLinePart(paths[1][2], 0, BASE_DIST, -90);
+  updateLinePart(paths[1][3], 0, BASE_DIST, 0);
+
+  /* ======
+     Path 3
+     ====== */
+  updateLinePart(paths[2][0], 0, BASE_DIST, -90);
+  updateLinePart(paths[2][1], 0, BASE_DIST, 90);
+  updateLinePart(paths[2][2], 0, BASE_DIST, 0);
+
+  /* ======
+     Path 4
+     ====== */
+  updateLinePart(paths[3][0], 0, BASE_DIST, 90);
+  updateLinePart(paths[3][1], 0, BASE_DIST, -90);
+  updateLinePart(paths[3][1], 0, BASE_DIST, 0);
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
+task main()
+{
+  StartTask(watchForStop);  // Watch for stop button presses
+
+  // Set line parts
+  initPathsArray();
 
   wait1Msec(2000);
 
@@ -193,7 +219,12 @@ task main()
 				startTurnDir = startTurn >= 0;
 				endTurnDir = endTurn >= 0;
 
-	  		while (!isOnLine) {}  // Wait until robot is on line
+				// Skip line part if it has no startTurn, distance or endTurn
+				if (startTurn == 0 && distance == 0 && endTurn == 0) {
+					continue;
+				}
+
+				while (!isOnLine) {}  // Wait until robot is on line
 	  		// TODO: Make robot go back (currently only goes forward)
 	  		// Also make this actually work
 	  		writeDebugStreamLine("\nPart %d", j);
