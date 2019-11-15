@@ -230,8 +230,7 @@ task main()
 				}
 
 				while (!isOnLine) {}
-	  		// TODO: Make robot go back (currently only goes forward)
-	  		// Also make this actually work
+
 	  		writeDebugStreamLine("\nPart %d", j);
 
 	  		writeDebugStreamLine("Start turn: %d", startTurn);
