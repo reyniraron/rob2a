@@ -21,3 +21,5 @@ Verkefni 1 gengur út á að setja saman vélmenni samkvæmt „Clawbot with Sen
 ### Að ofan
 
 ![Robot (top view)]({{ site.baseurl }}/assets/img/top.jpg)
+
+<!-- TODO: Add YouTube embed -->
