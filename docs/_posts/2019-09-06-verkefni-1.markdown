@@ -1,0 +1,23 @@
+---
+layout: post
+title:  "Verkefni 1"
+date:   2019-09-06 12:00:00 +0000
+categories: verkefni
+---
+## Verkefnalýsing
+
+Verkefni 1 gengur út á að setja saman vélmenni samkvæmt „Clawbot with Sensors“-leiðbeiningum VEX. Hér má sjá myndir af fullsamsettu vélmenni.
+
+## Myndir af vélmenni
+
+### Að framan
+
+![Robot (front view)](/assets/img/front.jpg)
+
+### Á hlið
+
+![Robot (side view)](/assets/img/side.jpg)
+
+### Að ofan
+
+![Robot (top view)](/assets/img/top.jpg)
