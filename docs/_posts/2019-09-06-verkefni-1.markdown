@@ -12,14 +12,12 @@ Verkefni 1 gengur út á að setja saman vélmenni samkvæmt „Clawbot with Sen
 
 ### Að framan
 
-![Robot (front view)]({{ site.baseurl }}/assets/img/front.jpg)
+![Robot (front view)]({{ site.baseurl }}/assets/img/verkefni1/front.jpg)
 
 ### Á hlið
 
-![Robot (side view)]({{ site.baseurl }}/assets/img/side.jpg)
+![Robot (side view)]({{ site.baseurl }}/assets/img/verkefni1/side.jpg)
 
 ### Að ofan
 
-![Robot (top view)]({{ site.baseurl }}/assets/img/top.jpg)
-
-<!-- TODO: Add YouTube embed -->
+![Robot (top view)]({{ site.baseurl }}/assets/img/verkefni1/top.jpg)
