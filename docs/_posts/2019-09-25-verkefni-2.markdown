@@ -39,15 +39,15 @@ Verkefni 2 er þríþætt. Fyrstu tveir hlutarnir ganga út á að keyra fram og
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
-	wait1Msec(2000);
-	for (int i = 0; i <= 5; i++) {
-		driveFor(i * BASE_TIME, true);  // forwards
-		stopMotors();
-		wait1Msec(WAIT_TIME);
-		driveFor(i * BASE_TIME, false); // backwards
-		stopMotors();
-		wait1Msec(WAIT_TIME);
-	}
+    wait1Msec(2000);
+    for (int i = 0; i <= 5; i++) {
+        driveFor(i * BASE_TIME, true);  // forwards
+        stopMotors();
+        wait1Msec(WAIT_TIME);
+        driveFor(i * BASE_TIME, false); // backwards
+        stopMotors();
+        wait1Msec(WAIT_TIME);
+    }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
@@ -98,16 +98,16 @@ task main()
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
-	wait1Msec(2000);							// Robot waits for 2000 milliseconds before executing program
+    wait1Msec(2000);							// Robot waits for 2000 milliseconds before executing program
 
-	for (int i = 0; i <= 5; i++) {
-		driveForDistance(i * BASE_DIST, true, NORMAL_SPEED, SLOWER_SPEED);  // forwards
-		stopMotors();
-		wait1Msec(WAIT_TIME);
-		driveForDistance(i * BASE_DIST, false, NORMAL_SPEED, SLOWER_SPEED); // backwards
-		stopMotors();
-		wait1Msec(WAIT_TIME);
-	}
+    for (int i = 0; i <= 5; i++) {
+        driveForDistance(i * BASE_DIST, true, NORMAL_SPEED, SLOWER_SPEED);  // forwards
+        stopMotors();
+        wait1Msec(WAIT_TIME);
+        driveForDistance(i * BASE_DIST, false, NORMAL_SPEED, SLOWER_SPEED); // backwards
+        stopMotors();
+        wait1Msec(WAIT_TIME);
+    }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
@@ -124,7 +124,7 @@ task main()
 
 ### Flæðirit
 
-![Flæðirit fyrir 2. hluta verkefnis 2]({{ baseurl }}/assets/img/verkefni2/part3/flowchart.png)
+![Flæðirit fyrir 3. hluta verkefnis 2]({{ baseurl }}/assets/img/verkefni2/part3/flowchart.png)
 
 ### Kóði
 
@@ -157,40 +157,40 @@ task main()
 
 // Directions to turn in (in order)
 short turns[15] = {
-	RIGHT,
-	LEFT,
-	LEFT,
-	RIGHT,
-	RIGHT,
-	LEFT,
-	RIGHT,
-	RIGHT,
-	LEFT,
-	RIGHT,
-	RIGHT,
-	LEFT,
-	LEFT,
-	RIGHT,
-	-1  // Do not turn in the end
+    RIGHT,
+    LEFT,
+    LEFT,
+    RIGHT,
+    RIGHT,
+    LEFT,
+    RIGHT,
+    RIGHT,
+    LEFT,
+    RIGHT,
+    RIGHT,
+    LEFT,
+    LEFT,
+    RIGHT,
+    -1  // Do not turn in the end
 };
 
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
-	const float TURN_DEG = BASE_TURN * 90.0 / 360.0;
-	wait1Msec(2000);							// Robot waits for 2000 milliseconds before executing program
-	for (int i = 0; i < 15; i++) {
-		// writeDebugStream("Round %d: ", i);
-		driveForDistance(BASE_DIST, true, NORMAL_SPEED, SLOWER_SPEED);  // forwards
-		stopMotors();
-		// writeDebugStream("Finished moving. ");
-		wait1Msec(WAIT_TIME);
-		// -1 in turns array means don't turn
-		if (turns[i] != -1) {
-			// writeDebugStreamLine("Turning %d in direction %d.", TURN_DEG, turns[i]);
-			turn(TURN_DEG, turns[i]);
-		}
-	}
+    const float TURN_DEG = BASE_TURN * 90.0 / 360.0;
+    wait1Msec(2000);							// Robot waits for 2000 milliseconds before executing program
+    for (int i = 0; i < 15; i++) {
+        // writeDebugStream("Round %d: ", i);
+        driveForDistance(BASE_DIST, true, NORMAL_SPEED, SLOWER_SPEED);  // forwards
+        stopMotors();
+        // writeDebugStream("Finished moving. ");
+        wait1Msec(WAIT_TIME);
+        // -1 in turns array means don't turn
+        if (turns[i] != -1) {
+            // writeDebugStreamLine("Turning %d in direction %d.", TURN_DEG, turns[i]);
+            turn(TURN_DEG, turns[i]);
+        }
+    }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
