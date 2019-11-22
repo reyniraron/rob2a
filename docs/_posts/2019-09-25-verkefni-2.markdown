@@ -8,15 +8,15 @@ categories: verkefni
 
 Verkefni 2 er þríþætt. Fyrstu tveir hlutarnir ganga út á að keyra fram og til baka ákveðnar vegalengdir (hækkar alltaf um 0,5 m í hvert skipti) fram og til baka þar til komið er í 2,5 m. Fyrri hlutinn keyrir í ákveðinn tíma og áætlar þannig vegalengdina en seinni hlutinn notar shaft encoders til að keyra ákveðna vegalengd og rétta sig af. Síðasti hlutinn gengur síðan út á að fylgja ákveðnu mynstri.
 
-### 1. hluti
+## 1. hluti
 
 Í þessum hluta átti vélmennið að keyra fram og aftur miðað við tíma.
 
-#### Flæðirit
+### Flæðirit
 
 ![Flæðirit fyrir 1. hluta verkefnis 2]({{ baseurl }}/assets/img/verkefni2/part1/flowchart.png)
 
-#### Kóði
+### Kóði
 
 ```c
 #pragma config(Motor,  port2,           rightMotor,    tmotorServoContinuousRotation, openLoop)
@@ -52,19 +52,19 @@ task main()
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
 
-#### Myndband
+### Myndband
 
 {% include youtube.html id='lqGAdrQ0XjE' %}
 
-### 2. hluti
+## 2. hluti
 
 Í þessum hluta átti vélmennið að gera það sama og í 1. hluta nema hvað notast var við snúninga á shaft encoders til að keyra rétta vegalengd í stað tíma.
 
-#### Flæðirit
+### Flæðirit
 
 ![Flæðirit fyrir 2. hluta verkefnis 2]({{ baseurl }}/assets/img/verkefni2/part2/flowchart.png)
 
-#### Kóði
+### Kóði
 
 ```c
 #pragma config(Sensor, dgtl3,  rightEncoder,   sensorQuadEncoder)
@@ -112,21 +112,21 @@ task main()
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
 
-#### Myndband
+### Myndband
 
 {% include youtube.html id='2JQCyHk9yn8' %}
 
-### 3. hluti
+## 3. hluti
 
 Í 3. hlutanum átti vélmennið að keyra eftir eftirfarandi mynstri.
 
 ![Mynstur 3. hluta verkefnis 2]({{ baseurl }}/assets/img/verkefni2/part3/path.png)
 
-#### Flæðirit
+### Flæðirit
 
 ![Flæðirit fyrir 2. hluta verkefnis 2]({{ baseurl }}/assets/img/verkefni2/part3/flowchart.png)
 
-#### Kóði
+### Kóði
 
 ```c
 #pragma config(Sensor, dgtl3,  rightEncoder,   sensorQuadEncoder)
@@ -195,6 +195,6 @@ task main()
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
 
-#### Myndband
+### Myndband
 
 {% include youtube.html id='fpfQkWUJEsE' %}
