@@ -25,7 +25,7 @@
 #include "headers/linefollowers.h"
 #include "functions/linefollowers.inc"
 
-#define POWER 31
+#define POWER 45
 #define LOW_POWER POWER / 4
 
 const int threshold = 2340;  // Found by adding sensor values for dark and light together and dividing by 2
@@ -47,6 +47,8 @@ void updateLinePart(LinePart &linePart, int startTurn, int distance, int endTurn
 LinePart paths[4][5];
 
 void findLine(int sensorNo, int threshold, int fullPower, int lowPower) {
+	// TODO: Try driving backwards to position where line was last seen and then turning
+	writeDebugStreamLine("Finding line using sensor %d...", sensorNo);
 	// -1 = left
   // 0 = center
   // 1 = right
@@ -58,6 +60,8 @@ void findLine(int sensorNo, int threshold, int fullPower, int lowPower) {
 		if (SensorValue(lineFollowerLEFT) < threshold) {
 			motor[leftMotor] = lowPower;
 			motor[rightMotor] = fullPower;
+			wait1Msec(500);
+			stopMotors();
 		}
 	}
 	// If right saw the line last, steer right
@@ -67,12 +71,13 @@ void findLine(int sensorNo, int threshold, int fullPower, int lowPower) {
 		if (SensorValue(lineFollowerRIGHT) < threshold) {
 			motor[leftMotor] = fullPower;
 			motor[rightMotor] = lowPower;
+			wait1Msec(500);
+			stopMotors();
 		}
 	}
 	// If center saw the line last, the function should not have been called!
 	else {
 		// writeDebugStreamLine("Why did this function get called?");
-
 		motor[leftMotor] = fullPower;
 		motor[rightMotor] = fullPower;
 	}
@@ -108,6 +113,7 @@ task watchLine() {
 
       // Right has highest value
       if (rightValue > centerValue && rightValue > leftValue) {
+      	// writeDebugStreamLine("Right has highest value...");
 	    	maxSensorNo = 1;
 	    }
 	    isOnLine = true;
@@ -119,6 +125,7 @@ task watchLine() {
 
       // Center has highest value
       if (centerValue > leftValue && centerValue > rightValue) {
+      	// writeDebugStreamLine("Center has highest value...");
     		maxSensorNo = 0;
     	}
     	isOnLine = true;
@@ -130,11 +137,13 @@ task watchLine() {
 
       // Left has highest value
 	    if (leftValue > centerValue && leftValue > rightValue) {
+	    	// writeDebugStreamLine("Left has highest value...");
 	    	maxSensorNo = -1;
 	    }
 	    isOnLine = true;
     }
     // Wait until robot is on line
+
 		if (!isOnLine) {
 			// FIXME: Never writes to debug stream, presumably never gets called
 			writeDebugStreamLine("Robot is not on line! Looking for line...");
