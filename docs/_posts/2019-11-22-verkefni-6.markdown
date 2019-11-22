@@ -1,0 +1,30 @@
+---
+layout: post
+title:  "Verkefni 6"
+date:   2019-11-22 12:00:00 +0000  # TODO: Replace with date of publishing (also rename file)
+categories: verkefni
+---
+## Verkefnalýsing
+
+Verkefni 6 gengur út á að nota þrjá line sensors undir vélmenninu til að fylgja línu, en eftir ákveðnum leiðum í þetta sinn. Vélmennið á að ná í fjögur glös og skila þeim í körfu.
+
+### Teikning
+
+![Teikning af verkefni 6]({{ baseurl }}/assets/img/verkefni6/paths.png)
+
+## Flæðirit
+
+![Flæðirit fyrir verkefni 6]({{ baseurl }}/assets/img/verkefni6/flowchart.png)
+
+## Kóði
+
+```c
+/* ======================
+   TODO: Insert code here
+   ====================== */
+```
+
+## Myndband
+
+<!-- TODO: Replace ID with video ID -->
+{% include youtube.html id='dQw4w9WgXcQ' %}
