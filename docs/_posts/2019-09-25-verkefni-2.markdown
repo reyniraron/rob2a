@@ -10,6 +10,8 @@ Verkefni 2 er þríþætt. Fyrstu tveir hlutarnir ganga út á að keyra fram og
 
 ### 1. hluti
 
+Í þessum hluta átti vélmennið að keyra fram og aftur miðað við tíma.
+
 #### Flæðirit
 
 ![Flæðirit fyrir 1. hluta verkefnis 2]({{ baseurl }}/assets/img/verkefni2/part1/flowchart.png)
