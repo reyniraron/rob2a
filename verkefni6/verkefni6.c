@@ -49,9 +49,13 @@ LinePart paths[4][5];
 void findLine(int sensorNo, int lastEncoderValue, int threshold, int fullPower, int lowPower) {
 	// TODO: Try driving backwards to position where line was last seen and then turning
 	writeDebugStreamLine("Finding line using sensor %d...", sensorNo);
-	// -1 = left
+  // -1 = left
   // 0 = center
   // 1 = right
+
+	// Drive backwards
+	//driveForDistance(SensorValue[rightEncoder] - lastEncoderValue, false, fullPower, lowPower);
+	/*
 
 	// If left saw the line last, steer left
 	if (sensorNo == -1) {
@@ -81,13 +85,14 @@ void findLine(int sensorNo, int lastEncoderValue, int threshold, int fullPower, 
 		motor[leftMotor] = fullPower;
 		motor[rightMotor] = fullPower;
 	}
+	*/
 }
 
 bool isOnLine = false;
 int maxSensorNo = 0;
 
 task watchLine() {
-  int encoderValue = SensorValue[rightEncoder];;
+  int encoderValue = SensorValue[rightEncoder];
   while (true) {
   	// Show sensor values on LCD
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -+
@@ -145,13 +150,13 @@ task watchLine() {
     }
     // Wait until robot is on line
 
-		if (!isOnLine) {
+		/*if (!isOnLine) {
 			writeDebugStreamLine("Robot is not on line! Looking for line...");
 			findLine(maxSensorNo, encoderValue, threshold, POWER, LOW_POWER);
-		}
-		else {
+		}*/
+		//else {
 			encoderValue = SensorValue[rightEncoder];
-		}
+		//}
   }
 }
 
@@ -241,7 +246,10 @@ task main()
 					continue;
 				}
 
-				while (!isOnLine) {}
+				// FIXME: Does not spam console
+				while (!isOnLine) {
+					writeDebugStreamLine("no line m9");
+				}
 
 	  		writeDebugStreamLine("\nPart %d", j);
 
