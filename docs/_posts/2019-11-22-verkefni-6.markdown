@@ -10,11 +10,11 @@ Verkefni 6 gengur út á að nota þrjá line sensors undir vélmenninu til að 
 
 ### Teikning
 
-![Teikning af verkefni 6]({{ baseurl }}/assets/img/verkefni6/paths.png)
+![Teikning af verkefni 6]({{ site.baseurl }}/assets/img/verkefni6/paths.png)
 
 ## Flæðirit
 
-![Flæðirit fyrir verkefni 6]({{ baseurl }}/assets/img/verkefni6/flowchart.png)
+![Flæðirit fyrir verkefni 6]({{ site.baseurl }}/assets/img/verkefni6/flowchart.png)
 
 ## Kóði
 

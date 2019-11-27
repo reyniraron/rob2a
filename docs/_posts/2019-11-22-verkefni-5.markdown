@@ -10,7 +10,7 @@ Verkefni 5 gengur út á að nota þrjá line sensors undir vélmenninu til að 
 
 ## Flæðirit
 
-![Flæðirit fyrir verkefni 5]({{ baseurl }}/assets/img/verkefni5/flowchart.png)
+![Flæðirit fyrir verkefni 5]({{ site.baseurl }}/assets/img/verkefni5/flowchart.png)
 
 ## Kóði
 

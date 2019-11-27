@@ -10,7 +10,7 @@ Verkefni 4 gengur út á að forrita vélmennið til að geta keyrt endalaust um
 
 ## Flæðirit
 
-![Flæðirit fyrir verkefni 4]({{ baseurl }}/assets/img/verkefni4/flowchart.png)
+![Flæðirit fyrir verkefni 4]({{ site.baseurl }}/assets/img/verkefni4/flowchart.png)
 
 ## Kóði
 

@@ -6,7 +6,7 @@ categories: verkefni
 ---
 ## Verkefnalýsing
 
-Verkefni 3 gengur út á að forrita fjarstýringuna svo hægt sé að stýra vélmenninu með henni. Í fyrsta hluta er hún notuð til að stýra mótorum (þ.e. til að keyra og stýra kló) en í seinni hluta er hún notuð með kóðanum úr [3. hluta verkefnis 2]({{ baseurl }}/verkefni/2019/11/22/verkefni-2.html#3-hluti) til að stöðva róbótinn. Auk þess er neyðarhnappur virkjaður á vélmenninu sjálfu sem stöðvar það.
+Verkefni 3 gengur út á að forrita fjarstýringuna svo hægt sé að stýra vélmenninu með henni. Í fyrsta hluta er hún notuð til að stýra mótorum (þ.e. til að keyra og stýra kló) en í seinni hluta er hún notuð með kóðanum úr [3. hluta verkefnis 2]({{ site.baseurl }}/verkefni/2019/11/22/verkefni-2.html#3-hluti) til að stöðva róbótinn. Auk þess er neyðarhnappur virkjaður á vélmenninu sjálfu sem stöðvar það.
 
 ## 1. hluti
 
@@ -88,11 +88,11 @@ task main ()
 
 ## 2. hluti
 
-Í þessum hluta var endurnýttur kóði úr [3. hluta verkefnis 2]({{ baseurl }}/verkefni/2019/11/22/verkefni-2.html#3-hluti). Við hann var bætt taski sem fylgdist með því hvort ýtt væri á neyðarhnapp á fjarstýringu eða á vélmenni.
+Í þessum hluta var endurnýttur kóði úr [3. hluta verkefnis 2]({{ site.baseurl }}/verkefni/2019/11/22/verkefni-2.html#3-hluti). Við hann var bætt taski sem fylgdist með því hvort ýtt væri á neyðarhnapp á fjarstýringu eða á vélmenni.
 
 ### Flæðirit
 
-![Flæðirit fyrir 2. hluta verkefnis 3]({{ baseurl }}/assets/img/verkefni3/part2/flowchart.png)
+![Flæðirit fyrir 2. hluta verkefnis 3]({{ site.baseurl }}/assets/img/verkefni3/part2/flowchart.png)
 
 ### Kóði
 
