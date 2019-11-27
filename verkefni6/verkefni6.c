@@ -46,7 +46,7 @@ void updateLinePart(LinePart &linePart, int startTurn, int distance, int endTurn
 // Array of paths
 LinePart paths[4][5];
 
-void findLine(int sensorNo, int threshold, int fullPower, int lowPower) {
+void findLine(int sensorNo, int lastEncoderValue, int threshold, int fullPower, int lowPower) {
 	// TODO: Try driving backwards to position where line was last seen and then turning
 	writeDebugStreamLine("Finding line using sensor %d...", sensorNo);
 	// -1 = left
@@ -87,6 +87,7 @@ bool isOnLine = false;
 int maxSensorNo = 0;
 
 task watchLine() {
+  int encoderValue = SensorValue[rightEncoder];;
   while (true) {
   	// Show sensor values on LCD
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -+
@@ -145,9 +146,11 @@ task watchLine() {
     // Wait until robot is on line
 
 		if (!isOnLine) {
-			// FIXME: Never writes to debug stream, presumably never gets called
 			writeDebugStreamLine("Robot is not on line! Looking for line...");
-			findLine(maxSensorNo, threshold, POWER, LOW_POWER);
+			findLine(maxSensorNo, encoderValue, threshold, POWER, LOW_POWER);
+		}
+		else {
+			encoderValue = SensorValue[rightEncoder];
 		}
   }
 }
