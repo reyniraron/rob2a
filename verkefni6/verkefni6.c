@@ -25,7 +25,7 @@
 #include "headers/linefollowers.h"
 #include "functions/linefollowers.inc"
 
-#define POWER 45
+#define POWER 127
 #define LOW_POWER POWER / 4
 
 const int threshold = 2340;  // Found by adding sensor values for dark and light together and dividing by 2
@@ -46,7 +46,7 @@ void updateLinePart(LinePart &linePart, int startTurn, int distance, int endTurn
 // Array of paths
 LinePart paths[4][5];
 
-void findLine(int sensorNo, int lastEncoderValue, int threshold, int fullPower, int lowPower) {
+/*void findLine(int sensorNo, int lastEncoderValue, int threshold, int fullPower, int lowPower) {
 	// TODO: Try driving backwards to position where line was last seen and then turning
 	writeDebugStreamLine("Finding line using sensor %d...", sensorNo);
   // -1 = left
@@ -85,14 +85,15 @@ void findLine(int sensorNo, int lastEncoderValue, int threshold, int fullPower, 
 		motor[leftMotor] = fullPower;
 		motor[rightMotor] = fullPower;
 	}
-	*/
-}
+
+}*/
 
 bool isOnLine = false;
 int maxSensorNo = 0;
+int lastEncoderValue;
 
 task watchLine() {
-  int encoderValue = SensorValue[rightEncoder];
+  lastEncoderValue = SensorValue[rightEncoder];
   while (true) {
   	// Show sensor values on LCD
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -+
@@ -155,7 +156,9 @@ task watchLine() {
 			findLine(maxSensorNo, encoderValue, threshold, POWER, LOW_POWER);
 		}*/
 		//else {
-			encoderValue = SensorValue[rightEncoder];
+		if (isOnLine) {
+			lastEncoderValue = SensorValue[rightEncoder];
+		}
 		//}
   }
 }
@@ -203,7 +206,7 @@ task main()
 
   wait1Msec(2000);
 
-  StartTask(watchLine);  // Make sure that robot is on line
+  // StartTask(watchLine);  // Make sure that robot is on line
 
   for (int i = 0; i < sizeof(paths) / sizeof(paths[0]); i++) {
   	for (int k = 0; k < 2; k++) {
@@ -246,10 +249,13 @@ task main()
 					continue;
 				}
 
-				// FIXME: Does not spam console
-				while (!isOnLine) {
-					writeDebugStreamLine("no line m9");
+				/*
+				if (!isOnLine) {
+					writeDebugStreamLine("Line lost! Looking for line...");
+					findLine(maxSensorNo, lastEncoderValue, threshold, POWER, LOW_POWER);
 				}
+
+				while (!isOnLine) {}*/
 
 	  		writeDebugStreamLine("\nPart %d", j);
 
