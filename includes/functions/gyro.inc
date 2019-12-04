@@ -2,7 +2,14 @@
 #include "../headers/motor.h"
 
 void gyroTurn(int deg10) {
-    int error = 5;  // Acceptable error in turn
+    // Clear out any previous gyro readings
+    SensorType[gyro] = sensorNone;
+    wait1Msec(1000);
+    // Reconfigure port as gyro sensor
+    SensorType[gyro] = sensorGyro;
+    wait1Msec(2000);
+
+    int error = 5;  // Acceptable margin of error in turn
 
     // While gyro has turned less than deg10 - 100 (10° short of input)
     while (abs(SensorValue[gyro]) < deg10 - 100) {
