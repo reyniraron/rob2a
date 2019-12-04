@@ -17,6 +17,8 @@
 #include "functions/stop.inc"
 #include "headers/motor.h"
 #include "functions/motor.inc"
+#include "headers/gyro.h"
+#include "functions/gyro.inc"
 
 #define POWER 127
 #define LOW_POWER POWER / 4
@@ -48,11 +50,11 @@ task main()
   int sawLineLast;
 
   while (true) {
-  	bool isOnLine = false;
-
     const int rightValue = SensorValue(lineFollowerRIGHT);
     const int centerValue = SensorValue(lineFollowerCENTER);
     const int leftValue = SensorValue(lineFollowerLEFT);
+
+    int sensorsOnLine = 0;
   	// Show sensor values on LCD
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -+
     displayLCDCenteredString(0, "LEFT  CNTR  RGHT");        //            |
@@ -73,6 +75,7 @@ task main()
       if (rightValue > centerValue && rightValue > leftValue) {
         sawLineLast = RIGHT_SENSOR;
       }
+      sensorsOnLine++;
     }
     // If center sensor sees dark, go straight
     if (centerValue > threshold) {
@@ -82,6 +85,7 @@ task main()
       if (centerValue > rightValue && centerValue > leftValue) {
         sawLineLast = CENTER_SENSOR;
       }
+      sensorsOnLine++;
     }
     // If left sensor sees dark, counter-steer left
     if (leftValue > threshold) {
@@ -91,10 +95,19 @@ task main()
       if (leftvalue > centerValue && leftValue > rightValue) {
         sawLineLast = LEFT_SENSOR;
       }
+      sensorsOnLine++;
     }
-    if (!isOnLine) {
+    // If no sensors saw line, find it
+    if (sensorsOnLine == 0) {
     	findLine(sawLineLast);
     	stopMotors();
+    }
+    // If all sensor saw line, robot has reached the end of the path
+    else if (sensorsOnLine == 3) {
+      stopMotors();
+      // TODO: Grab glass
+      gyroTurn(1800);  // Turn 180°
+      wait1Msec(500);
     }
   }
 }
