@@ -22,8 +22,8 @@
 #include "headers/claw.h"
 #include "functions/claw.inc"
 
-#define POWER FULL_POWER
-#define LOW_POWER POWER / 4
+#define POWER FULL_POWER / 2
+#define LOW_POWER POWER / 2
 
 #define RIGHT_SENSOR 1
 #define CENTER_SENSOR 0
@@ -114,3 +114,4 @@ task main()
   }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+z
