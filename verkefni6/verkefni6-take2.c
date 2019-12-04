@@ -19,8 +19,10 @@
 #include "functions/motor.inc"
 #include "headers/gyro.h"
 #include "functions/gyro.inc"
+#include "headers/claw.h"
+#include "functions/claw.inc"
 
-#define POWER 127
+#define POWER FULL_POWER
 #define LOW_POWER POWER / 4
 
 #define RIGHT_SENSOR 1
