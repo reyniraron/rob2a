@@ -33,17 +33,24 @@
 #define CENTER_SENSOR 0
 #define LEFT_SENSOR -1
 
-void findLine(int lastSensorNo) {
-  // TODO: Find line using number of sensor that saw line last
+void findLine(int lastSensorNo, int threshold) {
   if (lastSensorNo == RIGHT_SENSOR) {
-
+  	// Steer right until right line follower is on dark again
+  	while (SensorValue(lineFollowerRIGHT) < threshold) {
+  		motor[leftMotor]  = POWER;
+  		motor[rightMotor] = LOW_POWER;
+  	}
   }
   else if (lastSensorNo == LEFT_SENSOR) {
-
+  	while (SensorValue(lineFollowerLEFT) < threshold) {
+  		motor[leftMotor]  = LOW_POWER;
+  		motor[rightMotor] = POWER;
+  	}
   }
+  // Center
   else {
-
   }
+  stopMotors();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
@@ -102,15 +109,16 @@ task main()
     }
     // If no sensors saw line, find it
     if (sensorsOnLine == 0) {
-    	findLine(sawLineLast);
     	stopMotors();
+    	findLine(sawLineLast, threshold);
     }
     // If all sensor saw line, robot has reached the end of the path
     else if (sensorsOnLine == 3) {
       stopMotors();
       // TODO: Grab glass
+      /*
       gyroTurn(1800);  // Turn 180°
-      wait1Msec(500);
+      wait1Msec(500);*/
     }
   }
 }
