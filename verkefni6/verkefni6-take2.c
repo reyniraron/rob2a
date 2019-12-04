@@ -21,6 +21,23 @@
 #define POWER 127
 #define LOW_POWER POWER / 4
 
+#define RIGHT_SENSOR 1
+#define CENTER_SENSOR 0
+#define LEFT_SENSOR -1
+
+void findLine(int lastSensorNo) {
+  // TODO: Find line using number of sensor that saw line last
+  if (lastSensorNo == RIGHT_SENSOR) {
+
+  }
+  else if (lastSensorNo == LEFT_SENSOR) {
+
+  }
+  else {
+
+  }
+}
+
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
@@ -28,8 +45,14 @@ task main()
   wait1Msec(2000);
 
   const int threshold = 2340;  // Found by adding sensor values for dark and light together and dividing by 2
+  int sawLineLast;
+
   while (true) {
   	bool isOnLine = false;
+
+    const int rightValue = SensorValue(lineFollowerRIGHT);
+    const int centerValue = SensorValue(lineFollowerCENTER);
+    const int leftValue = SensorValue(lineFollowerLEFT);
   	// Show sensor values on LCD
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -+
     displayLCDCenteredString(0, "LEFT  CNTR  RGHT");        //            |
@@ -42,25 +65,35 @@ task main()
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -+
 
     // If right sensor sees dark, counter-steer right
-    if (SensorValue(lineFollowerRIGHT) > threshold) {
+    if (rightValue > threshold) {
       motor[leftMotor]  = POWER;
       motor[rightMotor] = LOW_POWER;
       isOnLine = true;
+      // Keep track of which sensor has the highest value in order to find line if robot goes off track
+      if (rightValue > centerValue && rightValue > leftValue) {
+        sawLineLast = RIGHT_SENSOR;
+      }
     }
     // If center sensor sees dark, go straight
-    if (SensorValue(lineFollowerCENTER) > threshold) {
+    if (centerValue > threshold) {
       motor[leftMotor]  = POWER;
       motor[rightMotor] = POWER;
       isOnLine = true;
+      if (centerValue > rightValue && centerValue > leftValue) {
+        sawLineLast = CENTER_SENSOR;
+      }
     }
     // If left sensor sees dark, counter-steer left
-    if (SensorValue(lineFollowerLEFT) > threshold) {
+    if (leftValue > threshold) {
       motor[leftMotor]  = LOW_POWER;
       motor[rightMotor] = POWER;
       isOnLine = true;
+      if (leftvalue > centerValue && leftValue > rightValue) {
+        sawLineLast = LEFT_SENSOR;
+      }
     }
     if (!isOnLine) {
-    	// TODO: Add findLine thing here (drive backwards?)
+    	findLine(sawLineLast);
     	stopMotors();
     }
   }
