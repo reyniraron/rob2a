@@ -13,8 +13,8 @@ void gyroTurn(int deg10) {
 
     // While gyro has turned less than deg10 - 100 (10° short of input)
     while (abs(SensorValue[gyro]) < deg10 - 100) {
-        motor[rightMotor] = 30;
-        motor[leftMotor] = -30;
+        motor[rightMotor] = 60;
+        motor[leftMotor] = -60;
     }
     // Brake briefly to prevent drift
     motor[rightMotor] = -5;
@@ -24,12 +24,12 @@ void gyroTurn(int deg10) {
     // Finish turning the robot more slowly than before (within margin of error)
     while (abs(SensorValue[gyro]) > deg10 + error || abs(SensorValue[gyro]) < deg10 - error) {
         if (abs(SensorValue[gyro]) > deg10) {
-            motor[rightMotor] = -20;
-            motor[leftMotor] = 20;
+            motor[rightMotor] = -40;
+            motor[leftMotor] = 40;
         }
         else {
-            motor[rightMotor] = 20;
-            motor[leftMotor] = -20;
+            motor[rightMotor] = 40;
+            motor[leftMotor] = -40;
         }
     }
     stopMotors();
