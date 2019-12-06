@@ -4,3 +4,9 @@
 
 layout: home
 ---
+<style>
+.site-nav .menu-icon,
+.site-nav label[for="nav-trigger"] {
+    display: none;
+}
+</style>
