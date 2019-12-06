@@ -1,7 +1,7 @@
 #include "../headers/claw.h"
 
 void openClaw() {
-    motor[clawMotor] = -FULL_POWER
+    motor[clawMotor] = -FULL_POWER;
     wait1Msec(1000);
     motor[clawMotor] = 0;
 }
